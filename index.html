@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+
+    <title>Konverter</title>
+</head>
+
+<body>
+
+    <div id="naslov" class="jumbotron-fluid text-center">
+        <h4 class="display-4">Measurement unit converter</h4>
+        <p id="joke" class="lead">
+            What unit of measurement do you use to weigh bones ? </br>
+            Skele-tons!
+        </p>
+        <button id="jokebutton" onclick="salaFun()" type="button" class="btn btn-dark mb-2">Click for another lame joke!</button>
+
+    </div>
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="display-4">Let's convert!</h1>
+                <form>
+                    <div class="form-group">
+                        <select class="form-control mb-2" id="unosVrste">
+                            <option id="Mass">Mass</option>
+                            <option id="Length">Length</option>
+                            <option id="Frequency">Frequency</option>
+                            <option id="Frequency">Energy</option>
+
+
+                            
+                          </select>
+                        <input type="number" step="0.01" class="form-control form-control-lg" placeholder="Input numbers here" id="unos">
+                        <select class="form-control" id="unosJedinice">
+                            <option id="o1">tonnes</option>
+                            <option id="o2">Kilogram</option>
+                            <option id="o3">Gram</option>
+                            <option id="o4">Miligram</option>
+                          </select>
+
+                    </div>
+                </form>
+                <div class="text-left" id="rezultat">
+                    <div id="1" class="card text-white bg-dark mb-2">
+                        <div class="card-block">
+                            <h4 id="r1">tonnes:</h4>
+                            <div id="rez1"></div>
+                        </div>
+                    </div>
+
+                    <div id="2" class="card text-white bg-dark mb-2">
+                        <div class="card-block">
+                            <h4 id="r2">Kilogram:</h4>
+                            <div id="rez2"></div>
+                        </div>
+                    </div>
+                    <div id="3" class="card text-white bg-dark mb-2">
+                        <div class="card-block">
+                            <h4 id="r3">Gram:</h4>
+                            <div id="rez3"></div>
+                        </div>
+                    </div>
+                    <div id="4" class="card text-white bg-dark mb-2">
+                        <div class="card-block">
+                            <h4 id="r4">Miligram:</h4>
+                            <div id="rez4"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    </div>
+
+    <script>
+        var nizJokes = [
+            'I have a friend who is really into measurements.\nYou guys really should meter.',
+            'What is the tastiest unit of measurement?\nMilimeter (mm)',
+            'You know there is a unit of measurement for pain?\nIts called Hertz',
+            'America is almost finished switching to the metric system.\nBut they still have miles to go.',
+            'Before you judge somebody who doest use the metric system...\nYou should walk 1.609344 kilometers in their shoes.',
+            'How do American schoolkids learn the metric system? \n9 millimeters at a time',
+            'What is the fastest way to go from 300 pounds to 140? \nConvert to kilograms.',
+            'I accidentally combined Fahrenheit and milliliters! FmL...',
+            'How do you become a mass murderer? Kilogram.',
+            'I love the metric system. It is the best by an absolute 1.6km'
+        ]
+
+        function salaFun() {
+            var randomIndex = Math.floor(Math.random() * nizJokes.length);
+            var randomElement = nizJokes[randomIndex];
+
+            document.getElementById("joke").innerHTML = randomElement;
+
+
+
+
+        }
+
+
+        document.getElementById("rezultat").style.visibility = "hidden";
+        var unos = document.getElementById("unos");
+        var unosVrste = document.getElementById("unosVrste");
+        var unosJedinice = document.getElementById("unosJedinice");
+        unos.addEventListener("keyup", myFunction);
+        unos.addEventListener("click", myFunction);
+
+        unosVrste.addEventListener("change", myFunction);
+        unosJedinice.addEventListener("change", myFunction);
+        var vrsta, jedinica;
+        vrsta = unosVrste.value;
+        jedinica = unosJedinice.value;
+
+
+
+
+        function myFunction() {
+            if (unos.value.length == 0) {
+                document.getElementById("rezultat").style.visibility = "hidden";
+            }
+            vrsta = unosVrste.value;
+            jedinica = unosJedinice.value;
+
+            if (vrsta === "Length") {
+                document.getElementById("o1").innerHTML = "kilometres";
+                document.getElementById("r1").innerHTML = "kilometres:";
+                if (jedinica === "kilometres") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value;
+                    document.getElementById("rez2").innerHTML = unos.value * 1000;
+                    document.getElementById("rez3").innerHTML = unos.value * 100000;
+                    document.getElementById("rez4").innerHTML = unos.value * 1000000;
+
+
+                }
+
+
+                document.getElementById("o2").innerHTML = "metres";
+                document.getElementById("r2").innerHTML = "metres:";
+                if (jedinica === "metres") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez2").innerHTML = unos.value;
+                    document.getElementById("rez1").innerHTML = unos.value / 1000;
+                    document.getElementById("rez3").innerHTML = unos.value * 100;
+                    document.getElementById("rez4").innerHTML = unos.value * 1000;
+
+
+                }
+
+
+                document.getElementById("o3").innerHTML = "centimetres";
+                document.getElementById("r3").innerHTML = "centimetres:";
+                if (jedinica === "centimetres") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez3").innerHTML = unos.value;
+                    document.getElementById("rez1").innerHTML = unos.value / 10000;
+                    document.getElementById("rez2").innerHTML = unos.value / 100;
+                    document.getElementById("rez4").innerHTML = unos.value * 10;
+
+
+                }
+
+                document.getElementById("o4").innerHTML = "Milimetres";
+                document.getElementById("r4").innerHTML = "Milimetres:";
+                if (jedinica === "Milimetres") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez4").innerHTML = unos.value;
+                    document.getElementById("rez1").innerHTML = unos.value / 1000000;
+                    document.getElementById("rez2").innerHTML = unos.value * 1000;
+                    document.getElementById("rez3").innerHTML = unos.value * 10;
+
+
+                }
+
+
+
+            } else if (vrsta === "Mass") {
+                document.getElementById("o1").innerHTML = "tonnes";
+                document.getElementById("o2").innerHTML = "Kilogram";
+                document.getElementById("o3").innerHTML = "Gram";
+                document.getElementById("o4").innerHTML = "Miligram";
+                document.getElementById("r1").innerHTML = "tonnes:";
+                if (jedinica === "tonnes") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value;
+                    document.getElementById("rez2").innerHTML = unos.value * 1000;
+                    document.getElementById("rez3").innerHTML = unos.value * 1000000;
+                    document.getElementById("rez4").innerHTML = unos.value * 1000000000;
+
+
+                }
+                document.getElementById("r2").innerHTML = "Kilogram:";
+                if (jedinica === "Kilogram") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value / 1000;
+                    document.getElementById("rez2").innerHTML = unos.value;
+                    document.getElementById("rez3").innerHTML = unos.value * 1000;
+                    document.getElementById("rez4").innerHTML = unos.value * 1000000;
+
+
+                }
+                document.getElementById("r3").innerHTML = "Gram:";
+                if (jedinica === "Gram") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value / 1000000;
+                    document.getElementById("rez2").innerHTML = unos.value / 1000;
+                    document.getElementById("rez3").innerHTML = unos.value;
+                    document.getElementById("rez4").innerHTML = unos.value * 1000;
+
+
+                }
+                document.getElementById("r4").innerHTML = "Miligram:";
+                if (jedinica === "Miligram") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value / 1000000000;
+                    document.getElementById("rez2").innerHTML = unos.value * 1000000;
+                    document.getElementById("rez3").innerHTML = unos.value * 1000;
+                    document.getElementById("rez4").innerHTML = unos.value;
+
+
+                }
+
+
+            } else if (vrsta === "Frequency") {
+                document.getElementById("o1").innerHTML = "Hertz";
+                document.getElementById("o2").innerHTML = "Kilohertz";
+                document.getElementById("o3").innerHTML = "Megahertz";
+                document.getElementById("o4").innerHTML = "Gigahertz";
+                document.getElementById("r1").innerHTML = "Hertz:";
+                if (jedinica === "Hertz") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value;
+                    document.getElementById("rez2").innerHTML = unos.value / 1000;
+                    document.getElementById("rez3").innerHTML = unos.value / 1000000;
+                    document.getElementById("rez4").innerHTML = unos.value / 1000000000;
+
+
+                }
+                document.getElementById("r2").innerHTML = "Kilohertz:";
+                if (jedinica === "Kilohertz") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value * 1000;
+                    document.getElementById("rez2").innerHTML = unos.value;
+                    document.getElementById("rez3").innerHTML = unos.value / 1000;
+                    document.getElementById("rez4").innerHTML = unos.value / 1000000;
+
+
+                }
+                document.getElementById("r3").innerHTML = "Megahertz:";
+                if (jedinica === "Megahertz") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value * 1000000;
+                    document.getElementById("rez2").innerHTML = unos.value * 1000;
+                    document.getElementById("rez3").innerHTML = unos.value;
+                    document.getElementById("rez4").innerHTML = unos.value / 1000;
+
+
+                }
+                document.getElementById("r4").innerHTML = "Gigahertz:";
+                if (jedinica === "Gigahertz") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value * 1000000000;
+                    document.getElementById("rez2").innerHTML = unos.value * 1000000;
+                    document.getElementById("rez3").innerHTML = unos.value * 1000;
+                    document.getElementById("rez4").innerHTML = unos.value;
+
+
+                }
+
+            } else if (vrsta === "Energy") {
+                document.getElementById("o1").innerHTML = "Joule";
+                document.getElementById("o2").innerHTML = "Kilojoule";
+                document.getElementById("o3").innerHTML = "Gram calorie";
+                document.getElementById("o4").innerHTML = "Kilocalorie";
+                document.getElementById("r1").innerHTML = "Joule:";
+                if (jedinica === "Joule") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value;
+                    document.getElementById("rez2").innerHTML = unos.value / 1000;
+                    document.getElementById("rez3").innerHTML = unos.value / 4.184;
+                    document.getElementById("rez4").innerHTML = unos.value / 4184;
+
+
+                }
+                document.getElementById("r2").innerHTML = "Kilojoule:";
+                if (jedinica === "Kilojoule") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value * 1000;
+                    document.getElementById("rez2").innerHTML = unos.value;
+                    document.getElementById("rez3").innerHTML = unos.value * 239;
+                    document.getElementById("rez4").innerHTML = unos.value / 4.184;
+
+
+                }
+                document.getElementById("r3").innerHTML = "Gram calorie:";
+                if (jedinica === "Gram calorie") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value * 4.184;
+                    document.getElementById("rez2").innerHTML = unos.value / 239;
+                    document.getElementById("rez3").innerHTML = unos.value;
+                    document.getElementById("rez4").innerHTML = unos.value / 1000;
+
+
+                }
+                document.getElementById("r4").innerHTML = "Kilocalorie:";
+                if (jedinica === "Kilocalorie") {
+                    if (unos.value.length != 0) {
+                        document.getElementById("rezultat").style.visibility = "visible";
+                    }
+                    document.getElementById("rez1").innerHTML = unos.value * 4184;
+                    document.getElementById("rez2").innerHTML = unos.value * 4.184;
+                    document.getElementById("rez3").innerHTML = unos.value * 1000;
+                    document.getElementById("rez4").innerHTML = unos.value;
+
+
+                }
+
+
+
+            }
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+
+</body>
+
+</html>

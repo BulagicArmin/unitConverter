@@ -1,0 +1,19 @@
+body {
+    background: url(background.png);
+    background-size: 100%;
+    background-repeat: repeat;
+}
+
+#naslov {
+    background: #E5E500;
+}
+
+.card-block {
+    color: #E5E500;
+    margin: 5px;
+    border: 1px solid gray;
+}
+
+#jokebutton:hover {
+    color: #E5E500;
+}
